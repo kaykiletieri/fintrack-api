@@ -4,18 +4,18 @@ namespace FinTrackAPI.Domain.Entities;
 
 public class EmergencyFund : BaseEntity
 {
-    public Guid UserUuid { get; private set; }
-    public User User { get; private set; }
+    public Guid WalletUuid { get; private set; }
+    public Wallet Wallet { get; private set; }
     public Money? TargetAmount { get; private set; }
     public Money CurrentAmount { get; private set; } = Money.Zero;
     public decimal MonthlyPercentage { get; private set; }
     public bool HasTarget => TargetAmount is not null;
     public bool IsCompleted => HasTarget && CurrentAmount >= (TargetAmount ?? Money.Zero);
 
-    public EmergencyFund(User user, decimal monthlyPercentage, Money? targetAmount = null)
+    public EmergencyFund(Wallet wallet, decimal monthlyPercentage, Money? targetAmount = null)
     {
-        User = user;
-        UserUuid = user.Uuid;
+        Wallet = wallet;
+        WalletUuid = wallet.Uuid;
         MonthlyPercentage = monthlyPercentage;
         TargetAmount = targetAmount;
     }
@@ -27,6 +27,6 @@ public class EmergencyFund : BaseEntity
 
     public Money CalculateMonthlyContribution()
     {
-        return new Money(User.BaseSalary.Amount * (MonthlyPercentage / 100));
+        return new Money(Wallet.Balance.Amount * (MonthlyPercentage / 100));
     }
 }

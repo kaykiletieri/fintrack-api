@@ -8,13 +8,13 @@ public class CreditCard : BaseEntity
     public Money Limit { get; private set; }
     public List<Expense> Expenses { get; private set; } = [];
     public List<Invoice> Invoices { get; private set; } = [];
-    public Guid UserUuid { get; private set; }
-    public User User { get; private set; }
+    public Guid WalletUuid { get; private set; }
+    public Wallet Wallet { get; private set; }
 
-    public CreditCard(User user, string name, Money limit)
+    public CreditCard(Wallet wallet, string name, Money limit)
     {
-        User = user;
-        UserUuid = user.Uuid;
+        Wallet = wallet;
+        WalletUuid = wallet.Uuid;
         Name = name;
         Limit = limit;
     }

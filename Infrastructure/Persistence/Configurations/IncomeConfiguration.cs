@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FinTrackAPI.Infrastructure.Persistence.Configurations;
 
-public class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
+public class IncomeConfiguration : IEntityTypeConfiguration<Income>
 {
-    public void Configure(EntityTypeBuilder<Invoice> builder)
+    public void Configure(EntityTypeBuilder<Income> builder)
     {
-        builder.ToTable("invoices");
+        builder.ToTable("incomes");
 
         builder.HasKey(i => i.Uuid);
 
